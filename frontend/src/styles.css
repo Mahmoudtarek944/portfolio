@@ -2105,9 +2105,10 @@ img {
   max-width: 700px;
 }
 
+/* ===== AVATAR — fixed to actually contain the image ===== */
 .profile-card__avatar {
-  width: 72px;
-  height: 72px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   background: hsla(110, 75%, 60%, 0.15);
   border: 3px solid var(--first-color);
@@ -2119,7 +2120,94 @@ img {
   font-weight: 800;
   color: var(--first-color);
   margin-bottom: 0.85rem;
+  overflow: hidden; /* keep the img clipped to the circle */
+  flex-shrink: 0;
 }
+
+.profile-card__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fill the circle, no overflow/distortion */
+  display: block;
+}
+
+/* ===== IMG UPLOAD ROW ===== */
+.img-upload {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* remove default margin-bottom on avatar when inside this row */
+.img-upload .profile-card__avatar {
+  margin-bottom: 0;
+}
+
+.img-upload form {
+  display: flex;
+  align-items: center;
+}
+
+/* ===== CUSTOM FILE INPUT ===== */
+.file-input-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.file-input-wrap input[type='file'] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.file-input-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  background: var(--container-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.65rem;
+  color: var(--white-color);
+  font-family: var(--body-font);
+  font-size: var(--small-font-size);
+  font-weight: 600;
+  transition:
+    border-color 0.3s,
+    color 0.3s,
+    background 0.3s;
+  white-space: nowrap;
+}
+
+.file-input-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--first-color);
+  flex-shrink: 0;
+}
+
+.file-input-wrap:hover .file-input-btn {
+  border-color: var(--first-color);
+  background: hsla(110, 75%, 60%, 0.08);
+}
+
+.file-input-name {
+  font-size: var(--small-font-size);
+  color: var(--text-color);
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .profile-card__name {
   font-size: 1.25rem;
   margin-bottom: 0.3rem;

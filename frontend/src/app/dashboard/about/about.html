@@ -1,10 +1,20 @@
 <div class="page" id="page-profile">
   <div class="card profile-card">
-    <div class="profile-card__avatar">
-      <form>
-        <input type="file" (change)="onImageSelected($event)" />
-      </form>
+    <div class="img-upload">
+      <div class="profile-card__avatar">
+        <img [src]="previewUrl" alt="Profile picture" />
+      </div>
+
+      <div class="file-input-wrap">
+        <input type="file" id="avatar-upload" accept="image/*" (change)="onImageSelected($event)" />
+        <label for="avatar-upload" class="file-input-btn">
+          <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" /></svg>
+          Choose Photo
+        </label>
+        <span class="file-input-name">{{ selectedFileName || 'No file chosen' }}</span>
+      </div>
     </div>
+
     <h2 class="profile-card__name">{{ dataHome?.name }}</h2>
     <p class="profile-card__role">{{ dataHome?.role?.[0] }}</p>
     <form class="profile-form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
@@ -26,6 +36,16 @@
         <div class="profile-form__group">
           <label>Location</label>
           <input type="text" class="form__input" formControlName="location" />
+        </div>
+      </div>
+      <div class="profile-form__row">
+        <div class="profile-form__group">
+          <label>Years Experience</label>
+          <input type="text" class="form__input" formControlName="experience" />
+        </div>
+        <div class="profile-form__group">
+          <label>Projects Done</label>
+          <input type="text" class="form__input" formControlName="projects" />
         </div>
       </div>
       <div class="profile-form__group">

@@ -4,6 +4,7 @@ import { IHome } from '../../core/model/home.model';
 import { IAbout } from '../../core/model/about.model';
 import { IContact } from '../../core/model/contact.model';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { showSuccedAdded } from '../../core/util/alert';
 
 @Component({
   selector: 'app-about',
@@ -32,9 +33,19 @@ export class About implements OnInit {
     github: new FormControl('', Validators.required),
     linkedin: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
+    experience: new FormControl('', Validators.required),
+    projects: new FormControl('', Validators.required),
   });
 
   firstTwoChar: string = '';
+
+  apiDataAbout = 'http://localhost:3000/upload/';
+
+  selectedFile: File | null = null;
+  previewUrl: string = '';
+  selectedFileName = '';
+  selcetedImage!: string;
+
   ngOnInit(): void {
     // to async when we get data from any endpoint , add it in the form "update the inital value"
     this.__profileService.getProfileFromHome().subscribe((value) => {
@@ -54,11 +65,15 @@ export class About implements OnInit {
     this.__profileService.getProfileFromAbout().subscribe((value) => {
       this.dataAbout = value;
       console.log(this.dataAbout);
+      console.log(this.dataAbout.experience);
 
+      this.previewUrl = this.apiDataAbout + this.dataAbout.image; // added photo
       this.myForm.patchValue({
         image: this.dataAbout.image,
         title: this.dataAbout.title,
         description: this.dataAbout.description,
+        experience: this.dataAbout.experience,
+        projects: this.dataAbout.projects,
       });
       this._cdr.detectChanges();
     });
@@ -77,37 +92,48 @@ export class About implements OnInit {
     this._cdr.detectChanges();
   }
 
-  selcetedImage!: File;
-
-  onImageSelected(event: Event) {
+  onImageSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
-    // console.log(input);
-    console.log(input.files);
-    if (input.files) {
-      this.selcetedImage = input.files[0];
-    }
-    // this.selcetedImage = input.files[0] ; -> possible null
-    this.myForm.patchValue({ image: this.selcetedImage.name });
-    console.log(this.selcetedImage);
+    const file = input.files?.[0];
+
+    if (!file) return;
+
+    this.selectedFile = file;
+    this.selectedFileName = file.name;
+
+    const reader = new FileReader(); // to change immediatlly
+    reader.onload = () => {
+      this.previewUrl = reader.result as string;
+      this._cdr.detectChanges();
+    };
+    reader.readAsDataURL(file);
   }
 
   updateAbout() {
     const formData = new FormData();
 
-    formData.append('image', this.selcetedImage);
+    if (this.selectedFile) {
+      // change the data of image
+      formData.append('image', this.selectedFile, this.selectedFile.name);
+    } else {
+      formData.append('image', this.dataAbout?.image || '');
+    }
+
+    // formData.append('image', this.selcetedImage);
     formData.append('title', this.myForm.value.title || '');
     formData.append('description', this.myForm.value.description || '');
 
-    // because in the schema are required
-    formData.append('experience', String(this.dataAbout?.experience || 0));
-    formData.append('projects', String(this.dataAbout?.projects || 0));
+    formData.append('experience', this.myForm.value.experience || '');
+    formData.append('projects', this.myForm.value.projects || '');
 
     this.__profileService.updateProfileFromAbout(formData).subscribe({
       next: (res) => {
         console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
+        if (res?.image) {
+          this.previewUrl = this.apiDataAbout + res.image;
+          this.selectedFile = null;
+          this._cdr.detectChanges();
+        }
       },
     });
   }
@@ -129,6 +155,7 @@ export class About implements OnInit {
         location: this.myForm.value.location,
       })
       .subscribe();
+    showSuccedAdded('Changes');
     this._cdr.detectChanges();
   }
 }

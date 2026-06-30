@@ -4,6 +4,6 @@ export interface IAbout {
   title: string;
   subTitle: string;
   description: string;
-  experience: number;
-  projects: number;
+  experience: string;
+  projects: string;
 }
