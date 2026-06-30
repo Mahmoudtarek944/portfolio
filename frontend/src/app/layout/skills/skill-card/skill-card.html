@@ -1,0 +1,8 @@
+<div class="skills__group">
+  <h3 class="skills__group-title">{{ skillCard.category }}</h3>
+  <div class="skills__list">
+    @for (details of skillCard.skills; track details.skillName) {
+      <app-details-skill-card [detailsCard]="details"></app-details-skill-card>
+    }
+  </div>
+</div>

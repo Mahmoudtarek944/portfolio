@@ -1,0 +1,10 @@
+<section class="services section" id="services">
+  <div class="container">
+    <h2 class="section__title">My <span>Services</span></h2>
+    <div class="services__grid">
+      @for (service of allService; track service._id) {
+        <app-service-card [serviceCard]="service"></app-service-card>
+      }
+    </div>
+  </div>
+</section>

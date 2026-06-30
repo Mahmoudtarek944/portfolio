@@ -1,0 +1,10 @@
+<section class="work section" id="work">
+  <div class="container">
+    <h2 class="section__title">My <span>Works</span></h2>
+    <div class="work__grid" id="work-grid">
+      @for (project of allProject; track project._id) {
+        <app-project-card [projectCard]="project"></app-project-card>
+      }
+    </div>
+  </div>
+</section>

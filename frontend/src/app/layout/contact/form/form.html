@@ -1,0 +1,32 @@
+<form class="contact__form" id="contact-form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <div class="form__row">
+    <div class="input-from">
+      <input type="text" placeholder="Your Name" class="form__input" formControlName="name" />
+      <input type="email" placeholder="Your Email" class="form__input" formControlName="email" />
+    </div>
+
+    @if (myForm.get('email')?.invalid && myForm.get('email')?.touched) {
+      @if (myForm.get('email')?.errors?.['required']) {
+        <div class="div-msg-error">
+          <p class="msg-error">Please enter an email address</p>
+        </div>
+      } @else {
+        <div class="div-msg-error">
+          <p class="msg-error">Please enter a valid email address (e.g., name@example.com)</p>
+        </div>
+      }
+    }
+  </div>
+  <input type="text" placeholder="Subject" class="form__input" formControlName="subject" />
+  <textarea
+    class="form__textarea"
+    placeholder="Tell me about your project..."
+    formControlName="message"
+  ></textarea>
+  <button type="submit" class="btn btn--primary" style="width: fit-content; align-self: flex-start">
+    Send Message
+    <svg style="width: 16px; height: 16px; fill: currentColor" viewBox="0 0 24 24">
+      <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+    </svg>
+  </button>
+</form>

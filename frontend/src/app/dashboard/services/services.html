@@ -1,0 +1,68 @@
+<div class="page" id="page-services">
+  <div class="card__head" style="margin-bottom: 1.5rem">
+    <h2
+      style="
+        font-family: var(--second-font);
+        color: var(--white-color);
+        font-size: var(--h2-font-size);
+      "
+    >
+      Services Manager
+    </h2>
+    <button class="btn-green" (click)="openModal()">+ Add Service</button>
+  </div>
+  <div class="services-admin-grid">
+    @for (card of myService; track card._id) {
+      <app-service-card
+        [myCard]="card"
+        (deleteServiceEvent)="deleteService($event)"
+        (updateServiceEvent)="onUpdateService($event)"
+      ></app-service-card>
+    }
+  </div>
+</div>
+
+<div class="modal-overlay" [class.show]="isModalOpen" (click)="onOverlayClick($event)">
+  <div class="modal">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <div class="modal__head">
+        <h3 class="modal__title">
+          {{ modalMode === 'add' ? 'Add New Service' : 'Update Service' }}
+        </h3>
+        <button type="button" class="modal__close" (click)="closeModal()"></button>
+      </div>
+
+      <div class="modal__body">
+        <div class="profile-form__group">
+          <label>Icon</label>
+          <input type="text" class="dash-input" placeholder="e.g. 🚀" formControlName="icon" />
+        </div>
+        <div class="profile-form__group">
+          <label>Title</label>
+          <input
+            type="text"
+            class="dash-input"
+            placeholder="e.g. Web Development"
+            formControlName="title"
+          />
+        </div>
+        <div class="profile-form__group">
+          <label>Description</label>
+          <textarea
+            class="dash-textarea"
+            style="height: 90px"
+            placeholder="Short description..."
+            formControlName="description"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="modal__foot">
+        <button type="button" class="btn-outline-green" (click)="closeModal()">Cancel</button>
+        <button type="submit" class="btn-green">
+          {{ modalMode === 'add' ? 'Add Service' : 'Update Service' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

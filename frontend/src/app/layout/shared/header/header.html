@@ -1,0 +1,22 @@
+<header class="header" id="header">
+  <nav class="nav container">
+    <a routerLink="home" class="nav__logo">{{ firstChar }}<span>.</span>{{ lastName }}</a>
+
+    <div class="nav__menu" id="nav-menu">
+      <ul class="nav__list">
+        <li><a routerLink="home" class="nav__link" routerLinkActive="active">Home</a></li>
+        <li><a routerLink="about" class="nav__link" routerLinkActive="active">About</a></li>
+        <li><a routerLink="project" class="nav__link" routerLinkActive="active">Works</a></li>
+        <li><a routerLink="service" class="nav__link" routerLinkActive="active">Services</a></li>
+        <li><a routerLink="skill" class="nav__link" routerLinkActive="active">Skills</a></li>
+      </ul>
+      <button class="nav__close" id="nav-close" aria-label="Close menu"></button>
+    </div>
+
+    <a routerLink="contact" class="nav__contact" routerLinkActive="active">Contact me</a>
+
+    <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>

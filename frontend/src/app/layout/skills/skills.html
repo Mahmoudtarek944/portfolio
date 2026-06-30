@@ -1,0 +1,10 @@
+<section class="skills section" id="skills">
+  <div class="container">
+    <h2 class="section__title">My <span>Skills</span></h2>
+    <div class="skills__container">
+      @for (skill of allSkill; track skill._id) {
+        <app-skill-card [skillCard]="skill"></app-skill-card>
+      }
+    </div>
+  </div>
+</section>

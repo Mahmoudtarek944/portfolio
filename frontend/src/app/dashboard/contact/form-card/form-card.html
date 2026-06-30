@@ -1,0 +1,10 @@
+<td>
+  <div class="tbl-name">
+    <div class="tbl-avatar">{{ myCard.name[0].toUpperCase() }}</div>
+    {{ myCard.name }}
+  </div>
+</td>
+<td>{{ myCard.email }}</td>
+<td>{{ myCard.subject }}</td>
+<td>{{ myCard.date }}</td>
+<td><button class="tbl-btn delete" (click)="deleteRow(myCard._id || '')">Delete</button></td>

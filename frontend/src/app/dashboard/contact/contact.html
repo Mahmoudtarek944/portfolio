@@ -1,0 +1,32 @@
+<div class="page" id="page-messages">
+  <div class="card">
+    <div class="card__head">
+      <h2 class="card__title">All Messages</h2>
+      <span class="badge-count"> {{ myFromData.length }} total</span>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Subject</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody id="messages-tbody">
+          @for (card of myFromData; track card.name) {
+            <tr
+              app-form-card
+              [myCard]="card"
+              (rowDelete)="onDeleteRow($event)"
+              class="unread-row"
+            ></tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

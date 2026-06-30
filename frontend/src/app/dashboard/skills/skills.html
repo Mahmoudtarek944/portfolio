@@ -1,0 +1,19 @@
+<div class="page" id="page-skills">
+  <div class="card__head" style="margin-bottom: 1.5rem">
+    <h2
+      style="
+        font-family: var(--second-font);
+        color: var(--white-color);
+        font-size: var(--h2-font-size);
+      "
+    >
+      Skills Manager
+    </h2>
+    <button class="btn-green" id="open-add-skill">+ Add Skill</button>
+  </div>
+  <div class="skills-admin-grid" id="skills-admin-grid">
+    @for (category of mySkills; track category._id) {
+      <app-skill-card [skillCategory]="category"></app-skill-card>
+    }
+  </div>
+</div>

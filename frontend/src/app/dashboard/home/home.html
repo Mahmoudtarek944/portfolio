@@ -1,0 +1,98 @@
+<main class="content" id="content">
+  <!-- ===== DASHBOARD PAGE ===== -->
+  <div class="page" id="page-dashboard">
+    <!-- Stats row -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card__icon" style="background: hsla(110, 75%, 60%, 0.12)">
+          <svg viewBox="0 0 24 24" style="fill: hsl(110, 75%, 60%)">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
+          </svg>
+        </div>
+        <div class="stat-card__info">
+          <p class="stat-card__label">Total Messages</p>
+          <p class="stat-card__value" id="stat-messages">{{ totalMessage }}</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__icon" style="background: hsla(220, 75%, 60%, 0.12)">
+          <svg viewBox="0 0 24 24" style="fill: hsl(220, 75%, 60%)">
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+            />
+          </svg>
+        </div>
+        <div class="stat-card__info">
+          <p class="stat-card__label">Projects</p>
+          <p class="stat-card__value">{{ totalProject }}</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__icon" style="background: hsla(300, 60%, 60%, 0.12)">
+          <svg viewBox="0 0 24 24" style="fill: hsl(300, 60%, 65%)">
+            <path
+              d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"
+            />
+          </svg>
+        </div>
+        <div class="stat-card__info">
+          <p class="stat-card__label">Skills Listed</p>
+          <p class="stat-card__value">{{ totalSkill }}</p>
+          <p class="stat-card__change">Across {{ totalCategorySkills }} groups</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-grid">
+      <!-- Recent Messages -->
+      <section class="card">
+        <div class="card__head">
+          <h2 class="card__title">Recent Messages</h2>
+          <a routerLink="/dashboard/contact" class="card__link" data-page="messages">View all</a>
+        </div>
+        <div class="msg-list" id="msg-list">
+          @if (latestMessages.length > 0) {
+            @for (card of latestMessages; track card._id) {
+              <app-recent-messages [myCard]="card"></app-recent-messages>
+            }
+          } @else {
+            <p>Loading recent messages...</p>
+          }
+        </div>
+      </section>
+
+      <!-- Quick Actions -->
+      <section class="card">
+        <div class="card__head">
+          <h2 class="card__title">Quick Actions</h2>
+        </div>
+        <div class="quick-actions">
+          <button class="qa-btn" id="qa-add-project" routerLink="/dashboard/project">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"
+              />
+            </svg>
+            Add Project
+          </button>
+          <button class="qa-btn" id="qa-add-skill" routerLink="/dashboard/skill">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"
+              />
+            </svg>
+            Add Skill
+          </button>
+          <button class="qa-btn" id="qa-edit-about" routerLink="/dashboard/profile">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+              />
+            </svg>
+            Edit About
+          </button>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,44 @@
+<section class="contact section" id="contact">
+  <div class="container">
+    <h2 class="section__title">Get In <span>Touch</span></h2>
+
+    <div class="contact__container">
+      <div>
+        <h3 style="font-size: var(--h2-font-size); margin-bottom: 1rem; color: var(--white-color)">
+          Let's work together
+        </h3>
+        <p style="color: var(--text-color); line-height: 1.8; margin-bottom: 2rem">
+          Have a project in mind? I'd love to hear about it. Send me a message and let's create
+          something amazing together.
+        </p>
+
+        <div class="contact__info">
+          <div class="contact__item">
+            <div class="contact__item-icon">📧</div>
+            <div>
+              <p class="contact__item-label">Email</p>
+              <p class="contact__item-value">{{ contactData.email }}</p>
+            </div>
+          </div>
+          <div class="contact__item">
+            <div class="contact__item-icon">📍</div>
+            <div>
+              <p class="contact__item-label">Location</p>
+              <p class="contact__item-value">{{ contactData.location }}</p>
+            </div>
+          </div>
+          <div class="contact__item">
+            <div class="contact__item-icon">💼</div>
+            <div>
+              <p class="contact__item-label">Availability</p>
+              <p class="contact__item-value">{{ contactData.availability }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- using Reactive Form -->
+      <app-form></app-form>
+    </div>
+  </div>
+</section>

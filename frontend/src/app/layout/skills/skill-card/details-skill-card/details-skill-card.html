@@ -1,0 +1,13 @@
+<div class="skill__item">
+  <div class="skill__header">
+    <span class="skill__name">{{ detailsCard.skillName }}</span>
+    <span class="skill__percent">{{ detailsCard.percentage }}%</span>
+  </div>
+  <div class="skill__bar">
+    <div
+      class="skill__fill"
+      [attr.data-width]="detailsCard.percentage"
+      [style.width]="detailsCard.percentage + '%'"
+    ></div>
+  </div>
+</div>

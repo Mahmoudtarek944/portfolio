@@ -1,0 +1,36 @@
+<section class="about section" id="about">
+  <div class="container about__container">
+    <div class="about__visual">
+      <div class="about__image">
+        <div class="about__image-placeholder">
+          <img [src]="imageURL + aboutData.image" [alt]="aboutData.title" />
+        </div>
+      </div>
+    </div>
+
+    <div class="about__data">
+      <p class="about__subtitle">Who I Am</p>
+      <h2 class="about__title">
+        {{ aboutData.title }} &<br /><span style="color: var(--first-color)">{{
+          aboutData.subTitle
+        }}</span>
+      </h2>
+      <p class="about__description">
+        {{ aboutData.description }}
+      </p>
+
+      <div class="about__stats">
+        <div class="about__stat">
+          <div class="about__stat-number">{{ aboutData.experience }}+</div>
+          <div class="about__stat-label">Years Experience</div>
+        </div>
+        <div class="about__stat">
+          <div class="about__stat-number">{{ aboutData.projects }}+</div>
+          <div class="about__stat-label">Projects Done</div>
+        </div>
+      </div>
+
+      <a routerLink="contact" class="btn btn--primary">Get In Touch</a>
+    </div>
+  </div>
+</section>

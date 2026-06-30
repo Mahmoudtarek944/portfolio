@@ -1,0 +1,48 @@
+<div class="page" id="page-profile">
+  <div class="card profile-card">
+    <div class="profile-card__avatar">
+      <form>
+        <input type="file" (change)="onImageSelected($event)" />
+      </form>
+    </div>
+    <h2 class="profile-card__name">{{ dataHome?.name }}</h2>
+    <p class="profile-card__role">{{ dataHome?.role?.[0] }}</p>
+    <form class="profile-form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <div class="profile-form__row">
+        <div class="profile-form__group">
+          <label>Full Name</label>
+          <input type="text" class="form__input" formControlName="name" />
+        </div>
+        <div class="profile-form__group">
+          <label>Email</label>
+          <input type="email" class="form__input" formControlName="email" />
+        </div>
+      </div>
+      <div class="profile-form__row">
+        <div class="profile-form__group">
+          <label>Title</label>
+          <input type="text" class="form__input" formControlName="title" />
+        </div>
+        <div class="profile-form__group">
+          <label>Location</label>
+          <input type="text" class="form__input" formControlName="location" />
+        </div>
+      </div>
+      <div class="profile-form__group">
+        <label>GitHub URL</label>
+        <input type="text" class="form__input" formControlName="github" />
+      </div>
+      <div class="profile-form__group">
+        <label>LinkedIn URL</label>
+        <input type="text" class="form__input" formControlName="linkedin" />
+      </div>
+      <div class="profile-form__group">
+        <label>About Description</label>
+        <textarea class="form__textarea" style="height: 120px" formControlName="description">
+.</textarea
+        >
+      </div>
+      <button class="btn-green" id="save-profile">Save Changes</button>
+    </form>
+  </div>
+</div>

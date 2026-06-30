@@ -1,0 +1,87 @@
+<div class="page" id="page-projects">
+  <div class="card__head" style="margin-bottom: 1.5rem">
+    <h2
+      style="
+        font-family: var(--second-font);
+        color: var(--white-color);
+        font-size: var(--h2-font-size);
+      "
+    >
+      Projects
+    </h2>
+    <button class="btn-green" id="open-add-project" (click)="openModal()">+ Add Project</button>
+  </div>
+
+  <div class="projects-grid" id="projects-grid">
+    @for (card of myProject; track card._id) {
+      <app-project-card
+        [myCard]="card"
+        (projectDelete)="onDeleteProject($event)"
+        (projectUpdata)="onUpdateProject($event)"
+      ></app-project-card>
+    }
+  </div>
+</div>
+
+<div class="modal-overlay" [class.show]="isModalOpen" (click)="onOverlayClick($event)">
+  <div class="modal">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <div class="modal__head">
+        <h3 class="modal__title">
+          {{ modalMode === 'add' ? 'Add New Project' : 'Update Project' }}
+        </h3>
+        <button type="button" class="modal__close" (click)="closeModal()"></button>
+      </div>
+
+      <div class="modal__body">
+        <div class="profile-form__group">
+          <label>Project Title</label>
+          <input type="text" class="dash-input" placeholder="e.g. My App" formControlName="title" />
+        </div>
+        <div class="profile-form__group">
+          <label>Tag / Category</label>
+          <input
+            type="text"
+            class="dash-input"
+            placeholder="e.g. Angular"
+            formControlName="category"
+          />
+        </div>
+        <div class="profile-form__group">
+          <label>Description</label>
+          <textarea
+            class="dash-textarea"
+            style="height: 90px"
+            placeholder="Short description..."
+            formControlName="description"
+          ></textarea>
+        </div>
+        <div class="profile-form__group">
+          <label>GitHub Link</label>
+          <input
+            type="url"
+            class="dash-input"
+            placeholder="https://github.com/..."
+            formControlName="githubLink"
+          />
+        </div>
+        <div class="profile-form__group">
+          <label>Demo Link</label>
+          <input
+            type="url"
+            class="dash-input"
+            placeholder="https://..."
+            formControlName="dimoLink"
+          />
+        </div>
+      </div>
+
+      <div class="modal__foot">
+        <button type="button" class="btn-outline-green" (click)="closeModal()">Cancel</button>
+        <button type="submit" class="btn-green">
+          {{ modalMode === 'add' ? 'Add Project' : 'Update Project' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

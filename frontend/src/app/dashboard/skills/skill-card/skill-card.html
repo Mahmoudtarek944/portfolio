@@ -1,0 +1,10 @@
+<div class="skill-admin-group">
+  <h3 class="skill-admin-group__title">
+    {{ skillCategory.category }}
+  </h3>
+  <div class="skill-admin-list">
+    @for (skill of skillCategory.skills; track skill) {
+      <app-skill-card-details [skillDetails]="skill"></app-skill-card-details>
+    }
+  </div>
+</div>
