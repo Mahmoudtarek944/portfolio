@@ -8,10 +8,21 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class SkillCardDetails {
   @Input() skillDetails!: { skillName: string; percentage: number };
+  @Input() categoryId!: string;
+  @Input() skillIndex!: number;
 
-  @Output() deleteSkillEvent = new EventEmitter<string>();
+  @Output() deleteSkillEvent = new EventEmitter<{ catId: string; index: number }>();
+  @Output() editSkillEvent = new EventEmitter<{ catId: string; index: number; skill: any }>();
 
-  deleteSkill(id: string) {
-    this.deleteSkillEvent.emit(id);
+  onDeleteSkill() {
+    this.deleteSkillEvent.emit({ catId: this.categoryId, index: this.skillIndex });
+  }
+
+  onEditClick() {
+    this.editSkillEvent.emit({
+      catId: this.categoryId,
+      index: this.skillIndex,
+      skill: this.skillDetails,
+    });
   }
 }

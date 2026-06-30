@@ -1,19 +1,63 @@
 <div class="page" id="page-skills">
   <div class="card__head" style="margin-bottom: 1.5rem">
-    <h2
-      style="
-        font-family: var(--second-font);
-        color: var(--white-color);
-        font-size: var(--h2-font-size);
-      "
-    >
-      Skills Manager
-    </h2>
-    <button class="btn-green" id="open-add-skill">+ Add Skill</button>
+    <h2>Skills Manager</h2>
+    <button class="btn-green" id="open-add-skill" (click)="openModal()">+ Add Skill</button>
   </div>
-  <div class="skills-admin-grid" id="skills-admin-grid">
+  <div class="skills-admin-grid">
     @for (category of mySkills; track category._id) {
-      <app-skill-card [skillCategory]="category"></app-skill-card>
+      <app-skill-card
+        [skillCategory]="category"
+        (deleteSkillAction)="onDeleteSkill($event)"
+        (editSkillAction)="onEditSkill($event)"
+      ></app-skill-card>
     }
+  </div>
+</div>
+
+<div class="modal-overlay" [class.show]="isModalOpen">
+  <div class="modal">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <div class="modal__head">
+        <h3>{{ modalMode === 'add' ? 'Add New Skill' : 'Update Skill' }}</h3>
+      </div>
+      <div class="modal__body">
+        @if (modalMode === 'add') {
+          <div class="profile-form__group">
+            <label>Category Name</label>
+            <input
+              type="text"
+              class="dash-input"
+              formControlName="category"
+              placeholder="e.g. Frontend"
+            />
+          </div>
+        }
+
+        <div class="profile-form__group">
+          <label>Skill Name</label>
+          <input
+            type="text"
+            class="dash-input"
+            formControlName="skillName"
+            placeholder="e.g. HTML"
+          />
+        </div>
+        <div class="profile-form__group">
+          <label>Percentage (%)</label>
+          <input
+            type="number"
+            class="dash-input"
+            formControlName="percentage"
+            placeholder="e.g. 50"
+          />
+        </div>
+      </div>
+      <div class="modal__foot">
+        <button type="button" class="btn-outline-green" (click)="closeModal()">Cancel</button>
+        <button type="submit" class="btn-green">
+          {{ modalMode === 'add' ? 'Add Skill' : 'Save Changes' }}
+        </button>
+      </div>
+    </form>
   </div>
 </div>

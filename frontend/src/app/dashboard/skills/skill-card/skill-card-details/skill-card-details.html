@@ -6,7 +6,7 @@
   <div class="skill-admin-bar">
     <div class="skill-admin-fill" [style.width.%]="skillDetails.percentage"></div>
   </div>
-  <div class="skill-admin-item__actions">
+  <div class="skill-admin-item__actions" (click)="onEditClick()">
     <button class="icon-btn">
       <svg viewBox="0 0 24 24">
         <path
@@ -14,7 +14,7 @@
         />
       </svg>
     </button>
-    <button class="icon-btn delete">
+    <button class="icon-btn delete" (click)="onDeleteSkill()">
       <svg viewBox="0 0 24 24">
         <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
       </svg>

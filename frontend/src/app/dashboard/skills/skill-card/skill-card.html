@@ -3,8 +3,14 @@
     {{ skillCategory.category }}
   </h3>
   <div class="skill-admin-list">
-    @for (skill of skillCategory.skills; track skill) {
-      <app-skill-card-details [skillDetails]="skill"></app-skill-card-details>
+    @for (skill of skillCategory.skills; track $index) {
+      <app-skill-card-details
+        [skillDetails]="skill"
+        [categoryId]="skillCategory._id"
+        [skillIndex]="$index"
+        (deleteSkillEvent)="forwardDelete($event)"
+        (editSkillEvent)="forwardEdit($event)"
+      ></app-skill-card-details>
     }
   </div>
 </div>
