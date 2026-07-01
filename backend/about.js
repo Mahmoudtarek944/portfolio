@@ -51,7 +51,7 @@ route.get("/", async (req, res) => {
 route.put("/", upload.single("image"), async (req, res) => {
   const { title, subTitle, description, experience, projects } = req.body;
   if (req.file) {
-    updateData.image = req.file.filename;
+    image = req.file.filename;
   }
   const about = await About.findOneAndUpdate(
     {},

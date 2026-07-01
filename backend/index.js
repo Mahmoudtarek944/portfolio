@@ -9,9 +9,9 @@ mongoose.connect("mongodb://localhost:27017/portfolio").then(() => {
 
 app.use(express.json());
 
-app.use("/upload", express.static("upload"));
-
 app.use(cors()); // can frontend get APIs
+
+app.use("/upload", express.static("upload"));
 
 const homeRouter = require("./home");
 app.use("/", homeRouter);
@@ -32,7 +32,7 @@ const contectRouter = require("./contact");
 app.use("/contact", contectRouter);
 
 const formRouter = require("./form");
-app.use("/contact", formRouter);
+app.use("/contact/form", formRouter);
 
 app.use((req, res) => {
   res.status(404).json({

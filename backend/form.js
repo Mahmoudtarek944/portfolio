@@ -32,24 +32,24 @@ const formSchema = new mongoose.Schema(
 
 const Form = mongoose.model("Form", formSchema);
 
-route.get("/form", async (req, res) => {
+route.get("/", async (req, res) => {
   const form = await Form.find({}, {});
 
   res.status(200).json(form);
 });
 
-route.get("/form/latest-messages", async (req, res) => {
+route.get("/latest-messages", async (req, res) => {
   const latestMessage = await Form.find().sort({ createdAt: -1 }).limit(3);
   res.status(200).json(latestMessage);
 });
 
-route.post("/form", async (req, res) => {
+route.post("/", async (req, res) => {
   const { name, email, subject, message, date } = req.body;
   const form = await Form.create({ name, email, subject, message, date });
   res.status(201).json(form);
 });
 
-route.delete("/form/:id", async (req, res) => {
+route.delete("/:id", async (req, res) => {
   const { id } = req.params;
   const formDeleted = await Form.findByIdAndDelete(id);
   res.status(200).json(formDeleted);

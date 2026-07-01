@@ -67,7 +67,7 @@ export class About implements OnInit {
       console.log(this.dataAbout);
       console.log(this.dataAbout.experience);
 
-      this.previewUrl = this.apiDataAbout + this.dataAbout.image; // added photo
+      this.previewUrl = this.apiDataAbout + this.dataAbout?.image; // added photo
       this.myForm.patchValue({
         image: this.dataAbout.image,
         title: this.dataAbout.title,

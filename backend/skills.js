@@ -153,4 +153,44 @@ route.put("/:id", async (req, res) => {
   }
 });
 
+route.delete("/:id/subskill/:index", async (req, res) => {
+  try {
+    const { id, index } = req.params;
+
+    const skillCategory = await Skill.findById(id);
+    if (!skillCategory) {
+      return res.status(404).json({ message: "Category not found" });
+    }
+    skillCategory.skills.splice(Number(index), 1);
+    if (skillCategory.skills.length === 0) {
+      await Skill.findByIdAndDelete(id);
+      return res.status(200).json({ deleted: true, _id: id, skills: [] });
+    }
+    await skillCategory.save();
+    res.status(200).json(skillCategory);
+  } catch (error) {
+    res.status(500).json({ error: "ID Not Format" });
+  }
+});
+
+route.put("/:id/subskill/:index", async (req, res) => {
+  try {
+    const { id, index } = req.params;
+    const { skillName, percentage } = req.body;
+
+    const skillCategory = await Skill.findById(id);
+    if (!skillCategory) {
+      return res.status(404).json({ message: "Category not found" });
+    }
+
+    if (skillName) skillCategory.skills[index].skillName = skillName;
+    if (percentage !== undefined)
+      skillCategory.skills[index].percentage = Number(percentage);
+    await skillCategory.save();
+
+    res.status(200).json(skillCategory);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 module.exports = route;

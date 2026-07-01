@@ -52,9 +52,20 @@ export class Skills implements OnInit {
   }
 
   onDeleteSkill(event: { catId: string; index: number }) {
-    this.__skillService.deleteDate(event.catId, event.index).subscribe((updatedCategory) => {
-      this.mySkills = this.mySkills.map((cat) => (cat._id === event.catId ? updatedCategory : cat));
-      this._cdr.detectChanges();
+    this.__skillService.deleteDate(event.catId, event.index).subscribe({
+      next: (updatedCategory) => {
+        if (!updatedCategory.skills || updatedCategory.skills.length === 0) {
+          this.mySkills = this.mySkills.filter((cat) => cat._id !== event.catId);
+        } else {
+          this.mySkills = this.mySkills.map((cat) =>
+            cat._id === event.catId ? updatedCategory : cat,
+          );
+        }
+        this._cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Delete failed:', err);
+      },
     });
   }
 
