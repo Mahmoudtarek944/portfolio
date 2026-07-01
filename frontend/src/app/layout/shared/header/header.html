@@ -1,6 +1,8 @@
 <header class="header" id="header">
   <nav class="nav container">
-    <a routerLink="home" class="nav__logo">{{ firstChar }}<span>.</span>{{ lastName }}</a>
+    <a routerLink="home" class="nav__logo"
+      >{{ firstChar }}<span>{{ lastName ? '.' + lastName : '' }}</span></a
+    >
 
     <div class="nav__menu" id="nav-menu">
       <ul class="nav__list">
