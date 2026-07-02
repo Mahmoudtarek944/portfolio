@@ -100,7 +100,9 @@
   padding: 0;
   margin: 0;
 }
-
+* {
+  overflow-x: hidden !important;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -494,7 +496,7 @@ img {
 }
 
 .about__container {
-  height: 80vh;
+  /* height: 100vh; */
   display: grid;
   gap: 3rem;
 }
@@ -1498,6 +1500,8 @@ img {
   flex: 1;
   padding: 1.75rem 1.5rem;
   overflow-y: auto;
+  overflow-x: hidden !important;
+  min-width: 0;
 }
 
 /* ============================================================
@@ -1614,6 +1618,7 @@ img {
 .msg-list {
   display: flex;
   flex-direction: column;
+  overflow-x: hidden !important;
 }
 
 .msg-item {
@@ -1625,6 +1630,8 @@ img {
   cursor: pointer;
   border-radius: 0.5rem;
   transition: background 0.2s;
+  min-width: 0;
+  overflow-x: hidden !important;
 }
 .msg-item:last-child {
   border-bottom: none;
@@ -1652,22 +1659,23 @@ img {
   border-color: var(--first-color);
 }
 
-.msg-item__body {
-  flex: 1;
-  min-width: 0;
-}
-
 .msg-item__top {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.25rem;
+  min-width: 0;
 }
+
 .msg-item__name {
   font-size: var(--small-font-size);
   font-weight: 600;
   color: var(--white-color);
   font-family: var(--second-font);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 .msg-item__time {
   font-size: 0.7rem;
@@ -1679,6 +1687,13 @@ img {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.msg-item__body {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .msg-item__dot {
